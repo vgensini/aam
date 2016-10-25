@@ -1,1 +1,0 @@
-/home/scripts/modfloat/grads/readout1.gs
