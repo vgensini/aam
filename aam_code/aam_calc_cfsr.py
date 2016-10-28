@@ -10,12 +10,15 @@
 #########################################################################################################
 import numpy as np
 #import Nio as pynio
-import sys,os,pygrib,aam,csv,datetime
-start_input = '20060511' #YYYYMMDD
-end_input  =  '20060511' #YYYYMMDD
+import sys,os,pygrib,aam,csv,datetime,math
+start_input = '20060501' #YYYYMMDD
+end_input  =  '20060501' #YYYYMMDD
 begdate = datetime.datetime.strptime(start_input,"%Y%m%d") 
 enddate = datetime.datetime.strptime(end_input,"%Y%m%d")
 dates = []
+pi = math.pi #Pi
+rad = pi/180. #radians
+dlat = 0.5 * rad
 while begdate <= enddate:
 	dates.append(begdate)
 	begdate+=datetime.timedelta(days=1)
@@ -53,10 +56,11 @@ for dt in dates:
 	#	dps=[1.,1.,2.,2.,3.,10.,10.,20.,20.,30.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,25.,25.,25.,25.,13.]
 	#	AAM=aam.daamom1(uwnd,dps,np.arange(-90,90.25,0.25),np.ones(721),0.0)
 	modname = 'CFS'
+	print uwnd[0,:,:]
 	if modname == 'CFS':
 		#dps=[0.,1.,2.,2.,3.,10.,10.,20.,20.,30.,25.,25.,25.,25.,25.,25.,50.,50.,50.,50.,50.,50.,50.,50.,50.,50.,25.,25.,25.,25.,25.,25.,25.,25.,25.,25.,0.]
 		dps=[0.,100.,200.,200.,300.,1000.,1000.,2000.,2000.,3000.,2500.,2500.,2500.,2500.,2500.,2500.,5000.,5000.,5000.,5000.,5000.,5000.,5000.,5000.,5000.,5000.,2500.,2500.,2500.,2500.,2500.,2500.,2500.,2500.,2500.,2500.,0.]
-		AAM=aam.daamom1(uwnd,dps,np.arange(-90,90.5,0.50),np.ones(361),0.0)
+		AAM=aam.daamom1(uwnd,dps,np.arange(-90,90.5,0.50),np.cos(lats[:,0] * rad) * dlat,0.0)
 	#Sanity Check
 	#if len(dps)==len(plevs):
 		#print "All good! " + str(len(dps)) + ' Pressure Levels;' + str(len(plevs)) + ' Delta Pressure Levels'
