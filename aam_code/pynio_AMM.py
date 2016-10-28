@@ -32,13 +32,13 @@ dps=[0.,100.,200.,200.,300.,1000.,1000.,2000.,2000.,3000.,2500.,2500.,2500.,2500
 dps=np.rollaxis(np.tile(dps[:],(361,720,1)),2)
 lats=np.arange(-90,90.5,0.5)
 def get_mon_aam(year):
-	month = '01'
+	month = '04'
 	if month=='01' or month=='03' or month=='05' or month=='07' or month=='08' or month=='10' or month=='12':
 		emon = '31'
 	elif month=='04' or month=='06' or month=='09' or month=='11':
 		emon = '30'
-	elif month=='02':
-		emon == '28'
+	if month=='02':
+		emon = '28'
 	start_input = str(year)+month+'0100'    #YYYYMMDDHH
 	end_input  =  str(year)+month+emon+'18' #YYYYMMDDHH
 	begdate = datetime.datetime.strptime(start_input,"%Y%m%d%H")
