@@ -18,8 +18,8 @@ file = open("AAM_climo.txt", "w")
 
 #years=np.arange(1979,1987,1)
 #years=np.arange(1987,1995,1)
-years=np.arange(1995,2003,1)
-#years=np.arange(2003,2011,1)
+#years=np.arange(1995,2003,1)
+years=np.arange(2003,2011,1)
 
 
 #Declare physical constants
@@ -32,7 +32,7 @@ dps=[0.,100.,200.,200.,300.,1000.,1000.,2000.,2000.,3000.,2500.,2500.,2500.,2500
 dps=np.rollaxis(np.tile(dps[:],(361,720,1)),2)
 lats=np.arange(-90,90.5,0.5)
 def get_mon_aam(year):
-	month = '04'
+	month = '12'
 	if month=='01' or month=='03' or month=='05' or month=='07' or month=='08' or month=='10' or month=='12':
 		emon = '31'
 	elif month=='04' or month=='06' or month=='09' or month=='11':
